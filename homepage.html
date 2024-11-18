@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algo-Lens Blind 75 Problems</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Importing fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #ffffff;
+            color: #2d3748;
+        }
+
+        /* Header styling */
+        header {
+            background-color: #66cc8a;
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        .header-title {
+            font-family: 'Bungee', sans-serif;
+            font-size: 1.8rem;
+            color: #ffffff;
+            text-align: center;
+            margin: 0;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px #00000030;
+        }
+
+        /* Navigation styling */
+        nav {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav a:hover {
+            background-color: #4caf50;
+        }
+
+        /* Main content styling */
+        main {
+            padding: 20px 40px;
+        }
+
+        .section-title {
+            font-family: 'Bungee', sans-serif;
+            font-size: 2.2rem;
+            color: #2d3748;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        /* Category section */
+        .category {
+            margin: 20px 0;
+        }
+
+        .category-title {
+            font-size: 1.5rem;
+            color: #4a5568;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            font-size: 1.1rem;
+            color: #2d3748;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        li:hover {
+            color: #48bb78;
+            text-decoration: underline;
+        }
+
+        /* Subtle link style */
+        li a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1 class="header-title">ALGO-LENS: SEE ALGORITHMS IN ACTION!</h1>
+        <nav>
+            <a href="#">Blind75</a>
+            <a href="#">All Problems</a>
+            <a href="#">Settings</a>
+        </nav>
+    </header>
+
+    <!-- Main content -->
+    <main>
+        <h2 class="section-title">BLIND 75 PROBLEMS</h2>
+
+        <!-- Dynamic Programming Category -->
+        <div class="category">
+            <h3 class="category-title">Dynamic Programming</h3>
+            <ul>
+                <li><a href="containsDuplicate.html">Contains Duplicate</a></li>
+                <li><a href="climbing-stairs.html">Climbing Stairs</a></li>
+                <li><a href="coin-change.html">Coin Change</a></li>
+                <li><a href="house-robber.html">House Robber</a></li>
+                <li><a href="word-break.html">Word Break</a></li>
+                <li><a href="edit-distance.html">Edit Distance</a></li>
+                <li><a href="longest-increasing-subsequence.html">Longest Increasing Subsequence</a></li>
+                <li><a href="maximum-subarray.html">Maximum Subarray</a></li>
+            </ul>
+        </div>
+
+        <!-- String Category -->
+        <div class="category">
+            <h3 class="category-title">String</h3>
+            <ul>
+                <li><a href="word-break-string.html">Word Break</a></li>
+                <li><a href="edit-distance-string.html">Edit Distance</a></li>
+            </ul>
+        </div>
+
+        <!-- 2D Dynamic Programming Category -->
+        <div class="category">
+            <h3 class="category-title">2D Dynamic Programming</h3>
+            <ul>
+                <li><a href="minimum-path-sum.html">Minimum Path Sum</a></li>
+                <li><a href="unique-paths.html">Unique Paths</a></li>
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contains Duplicate Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+
+        body {
+            font-family: 'Bungee', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .code-section {
+            background-color: #2d3748;
+            color: #f8f8f2;
+            width: 45%;
+            border-radius: 10px;
+            padding: 20px;
+            overflow-y: auto;
+            height: 500px;
+            box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .macbook-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 30px;
+            background-color: #444c56;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+            padding-left: 10px;
+            color: #a0aec0;
+        }
+
+        .macbook-bar div {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .macbook-bar .close-btn {
+            background-color: #ff5f57;
+        }
+
+        .macbook-bar .minimize-btn {
+            background-color: #ffbd2e;
+        }
+
+        .macbook-bar .maximize-btn {
+            background-color: #28c93f;
+        }
+
+        .code-section pre {
+            line-height: 1.5;
+            margin-top: 40px;
+        }
+
+        .line-highlight {
+            background-color: #66cc8a;
+            padding: 2px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .visualization-section {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .array-container, .map-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            position: relative;
+            flex-wrap: wrap;
+            padding: 10px;
+            background-color: #f7fafc;
+            border: 2px solid #cbd5e0;
+            border-radius: 10px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+        }
+
+        .array-element, .map-element {
+            width: 60px;
+            height: 60px;
+            border: 2px solid #2d3748;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            font-size: 18px;
+            border-radius: 8px;
+            transition: transform 0.2s;
+        }
+
+        .map-element {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            margin: 10px;
+            padding: 10px;
+            background-color: #edf2f7;
+            border: 2px solid #4a5568;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .array-element:hover, .map-element:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .highlight {
+            background-color: #66cc8a;
+            color: white;
+        }
+
+        .duplicate {
+            background-color: #e53e3e;
+            color: white;
+        }
+
+        .custom-button {
+            transition: transform 0.2s ease;
+        }
+
+        .custom-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .info-box, .result-box {
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #2d3748;
+        }
+
+        .map-key {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+
+        .map-value {
+            font-size: 16px;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="bg-[#66cc8a] p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="logo-font text-xl font-extrabold text-gray-900">
+                ALGO-LENS: SEE ALGORITHMS IN ACTION!
+            </div>
+            <nav class="flex space-x-6">
+                <a href="#" class="text-gray-700">Blind75</a>
+                <a href="#" class="text-gray-700">All Problems</a>
+                <a href="#" class="text-gray-700">Settings</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container mx-auto mt-6">
+        <!-- Code Section -->
+        <div class="code-section">
+            <!-- Macbook-style title bar -->
+            <div class="macbook-bar">
+                <div class="close-btn"></div>
+                <div class="minimize-btn"></div>
+                <div class="maximize-btn"></div>
+            </div>
+
+            <!-- Problem Title -->
+            <h2 class="text-2xl text-center text-white mt-8">Contains Duplicate</h2>
+
+            <!-- Code Box -->
+            <pre id="code"><code>
+def containsDuplicate(nums):
+    num_map = {}
+    for num in nums:
+        if num in num_map:
+            return True
+        num_map[num] = True
+    return False
+            </code></pre>
+        </div>
+
+        <!-- Visualization Section -->
+        <div class="visualization-section">
+            <h2 class="text-3xl mb-6">Contains Duplicate</h2>
+
+            <!-- Input Section -->
+            <label for="arrayInput" class="mb-4 text-lg text-gray-700">Enter array:</label>
+            <input id="arrayInput" class="mb-4 px-4 py-2 border border-gray-300 rounded-lg" type="text" placeholder="Enter comma-separated values, e.g., 1,2,3,4,1">
+
+            <!-- Array Visualization -->
+            <h3 class="text-2xl">Array:</h3>
+            <div class="array-container">
+                <!-- Array elements will be injected here -->
+            </div>
+
+            <!-- HashMap Visualization -->
+            <h3 class="text-2xl mt-6">HashMap (num_map):</h3>
+            <div class="map-container">
+                <!-- HashMap elements will be injected here -->
+            </div>
+
+            <div class="info-box" id="info-box"></div>
+            <div class="result-box" id="result-box"></div>
+
+            <!-- Buttons to Control Visualization -->
+            <div class="flex mt-6">
+                <button id="prev-btn" class="custom-button bg-gray-500 text-white px-6 py-2 rounded-full mr-4 shadow-lg disabled">Prev</button>
+                <button id="next-btn" class="custom-button bg-green-500 text-white px-6 py-2 rounded-full shadow-lg">Next</button>
+                <button id="reset-btn" class="custom-button bg-red-500 text-white px-6 py-2 rounded-full shadow-lg">Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let array = [];
+        let index = 0;
+        let map = {};  // HashMap equivalent
+
+        // Elements to manipulate
+        const codeElement = document.getElementById('code');
+        const infoBox = document.getElementById('info-box');
+        const resultBox = document.getElementById('result-box');
+        const arrayContainer = document.querySelector('.array-container');
+        const mapContainer = document.querySelector('.map-container');
+        const nextBtn = document.getElementById('next-btn');
+        const prevBtn = document.getElementById('prev-btn');
+        const resetBtn = document.getElementById('reset-btn');
+        const arrayInput = document.getElementById('arrayInput');
+
+        // Next button logic
+        nextBtn.addEventListener('click', function() {
+            if (index < array.length) {
+                updateCodeLine(4); // Highlight the 'for' loop line
+
+                // Highlight the current element in the array
+                const currentElement = document.getElementById(`el${index}`);
+                currentElement.classList.add('highlight');
+
+                // Check if current number is a duplicate
+                if (map[array[index]]) {
+                    resultBox.innerText = 'Duplicate Found: ' + array[index];
+                    currentElement.classList.add('duplicate');
+                    infoBox.innerText = '';
+                    return;  // Stop execution if a duplicate is found
+                }
+
+                // Add number to HashMap
+                map[array[index]] = true;
+                infoBox.innerText = 'Current number: ' + array[index];
+                renderMap();
+
+                // Move to the next index
+                index++;
+                prevBtn.classList.remove('disabled'); // Enable Prev button
+
+                // If at the end of the array, disable Next button
+                if (index >= array.length) {
+                    nextBtn.classList.add('disabled');
+                }
+            }
+        });
+
+        // Previous button logic
+        prevBtn.addEventListener('click', function() {
+            if (index > 0) {
+                index--; // Move back one index
+
+                // Remove highlights
+                const currentElement = document.getElementById(`el${index + 1}`);
+                currentElement.classList.remove('highlight', 'duplicate');
+
+                // Reset map and re-render
+                delete map[array[index]];
+                renderMap();
+                infoBox.innerText = '';
+                resultBox.innerText = '';
+
+                // Reset code line to 'for' loop
+                updateCodeLine(4);
+
+                // Disable prev button if at start
+                if (index === 0) {
+                    prevBtn.classList.add('disabled');
+                }
+
+                // Enable next button
+                nextBtn.classList.remove('disabled');
+            }
+        });
+
+        // Reset button logic
+        resetBtn.addEventListener('click', function() {
+            arrayInput.value = '';  // Clear input field
+            resetVisualization();  // Call function to reset visualization
+        });
+
+        // Input handler to parse array and reset the visualization
+        arrayInput.addEventListener('change', function() {
+            array = arrayInput.value.split(',').map(Number);
+            index = 0;
+            map = {};
+            renderArray();
+            renderMap();
+            infoBox.innerText = '';
+            resultBox.innerText = '';
+            nextBtn.classList.remove('disabled');
+            prevBtn.classList.add('disabled');
+        });
+
+        // Helper function to reset visualization
+        function resetVisualization() {
+            array = [];
+            index = 0;
+            map = {};
+            renderArray();
+            renderMap();
+            infoBox.innerText = '';
+            resultBox.innerText = '';
+            nextBtn.classList.add('disabled');
+            prevBtn.classList.add('disabled');
+            updateCodeLine(4);  // Reset code highlighting
+        }
+
+        // Helper function to display the array
+        function renderArray() {
+            arrayContainer.innerHTML = '';
+            array.forEach((el, i) => {
+                const div = document.createElement('div');
+                div.classList.add('array-element');
+                div.id = `el${i}`;
+                div.innerText = el;
+                arrayContainer.appendChild(div);
+            });
+        }
+
+        // Helper function to display the HashMap (num_map)
+        function renderMap() {
+            mapContainer.innerHTML = '';
+            Object.keys(map).forEach(key => {
+                const div = document.createElement('div');
+                div.classList.add('map-element');
+                div.innerHTML = `<span class="map-key">${key}</span>: <span class="map-value">true</span>`;
+                mapContainer.appendChild(div);
+            });
+        }
+
+        // Helper function to highlight specific lines of code
+        function updateCodeLine(lineNumber) {
+            const lines = codeElement.innerText.split('\n');
+            codeElement.innerHTML = '';
+            lines.forEach((line, i) => {
+                const span = document.createElement('span');
+                if (i === lineNumber - 1) {
+                    span.classList.add('line-highlight');
+                }
+                span.innerText = line;
+                codeElement.appendChild(span);
+                codeElement.appendChild(document.createElement('br'));
+            });
+        }
+    </script>
+</body>
+</html>
